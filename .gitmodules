@@ -1,0 +1,9 @@
+[submodule "subworkflows/bwaMem"]
+	path = subworkflows/bwaMem
+	url = git@github.com:oicr-gsi/bwa.git
+[submodule "subworkflows/mutect2"]
+	path = subworkflows/mutect2
+	url = git@github.com:oicr-gsi/mutect2.git
+[submodule "subworkflows/variantEffectPredictor"]
+	path = subworkflows/variantEffectPredictor
+	url = git@github.com:oicr-gsi/variantEffectPredictor.git
