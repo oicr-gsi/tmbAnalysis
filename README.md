@@ -34,9 +34,8 @@ Parameter|Value|Default|Description
 Parameter|Value|Default|Description
 ---|---|---|---
 `calculateTMB.modules`|String|"tmb-r/1.0"|module for running preprocessing
-`calculateTMB.jobMemory`|Int|24|memory allocated to preprocessing, in GB
-`calculateTMB.timeout`|Int|20|timeout in hours
-`calculateTMB.threads`|Int|8|number of cpu threads to be used
+`calculateTMB.jobMemory`|Int|4|memory allocated to preprocessing, in GB
+`calculateTMB.timeout`|Int|6|timeout in hours
 
 
 ### Outputs
@@ -46,7 +45,33 @@ Output | Type | Description
 `outputTMB`|File|output TMB file
 
 
-## Support
+## Commands
+ This section lists command(s) run by WORKFLOW workflow
+ 
+ * Running WORKFLOW
+ 
+ === Description here ===.
+ 
+ <<<
+ 
+     set -euo pipefail
+ 
+ 
+     col=$(zcat ~{inputMaf} | grep "Hugo_Symbol" | head -n1 | awk '{ for (i=1; i<=NF; ++i) { if ($i =="FILTER") print i } }')
+     
+     if [[ $col > 0 ]]; then
+       zcat ~{inputMaf} | grep "Hugo_Symbol" | head -n1 > ~{outputFileNamePrefix}.pass.maf
+       zcat ~{inputMaf} | awk -F '\t' -v id="$col" '$id=="PASS"' >> ~{outputFileNamePrefix}.pass.maf
+     else
+       zcat ~{inputMaf} > ~{outputFileNamePrefix}.pass.maf
+     fi
+ 
+ 
+     space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
+     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
+ 
+   >>>
+ ## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
 
