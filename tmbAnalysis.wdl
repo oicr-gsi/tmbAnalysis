@@ -37,23 +37,21 @@ workflow tmbAnalysis {
 
 task calculateTMB {
   input {
-   File inputMaf
-   String targetBed
-   String outputFileNamePrefix
-   String modules = "tmb-r/1.0"
-   Int jobMemory = 24
-   Int timeout = 20
-   Int threads = 8
+    File inputMaf
+    String targetBed
+    String outputFileNamePrefix
+    String modules = "tmb-r/1.0"
+    Int jobMemory = 4
+    Int timeout = 6
   }
 
   parameter_meta {
-  inputMaf: "input maf file"
-  targetBed: "target bed file"
-  outputFileNamePrefix: "prefix for output file"
-  modules: "module for running preprocessing"
-  jobMemory: "memory allocated to preprocessing, in GB"
-  timeout: "timeout in hours"
-  threads: "number of cpu threads to be used"
+    inputMaf: "input maf file"
+    targetBed: "target bed file"
+    outputFileNamePrefix: "prefix for output file"
+    modules: "module for running preprocessing"
+    jobMemory: "memory allocated to preprocessing, in GB"
+    timeout: "timeout in hours"
   }
 
   command <<<
@@ -79,7 +77,6 @@ task calculateTMB {
   runtime {
     memory:  "~{jobMemory} GB"
     modules: "~{modules}"
-    cpu:     "~{threads}"
     timeout: "~{timeout}"
   }
 

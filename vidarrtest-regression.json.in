@@ -14,7 +14,10 @@
                 "type": "EXTERNAL"
             },
             "tmbAnalysis.outputFileNamePrefix": "tmbAnalysis_test",
-            "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed"
+            "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed",
+            "tmbAnalysis.calculateTMB.modules": null,
+            "tmbAnalysis.calculateTMB.jobMemory": null,
+            "tmbAnalysis.calculateTMB.timeout": null,
         },
         "description": "workflow to calculate TMB",
         "engineArguments": {
