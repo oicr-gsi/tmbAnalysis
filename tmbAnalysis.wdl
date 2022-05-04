@@ -5,19 +5,23 @@ workflow tmbAnalysis {
     File inputMaf
     String intervalFile
     String outputFileNamePrefix
-}
-
-  parameter_meta {
-    inputMaf: "input maf file"
-    intervalFile: "target bed file"
-    outputFileNamePrefix: "Prefix to use for output file"
   }
-   
+
   call calculateTMB {
     input: 
       inputMaf = inputMaf,
       targetBed = intervalFile,
       outputFileNamePrefix = outputFileNamePrefix
+  }
+
+  output {
+    File outputTMB = calculateTMB.outputTMB
+  }  
+
+  parameter_meta {
+    inputMaf: "input maf file"
+    intervalFile: "target bed file"
+    outputFileNamePrefix: "Prefix to use for output file"
   }
 
   meta {
@@ -26,11 +30,10 @@ workflow tmbAnalysis {
     description: "workflow to calculate TMB"
     dependencies:
     []
-  }
-  
-  output {
-    File outputTMB = calculateTMB.outputTMB
-  }
+    output_meta: {
+      outputTMB: "output TMB file"
+    }  
+  } 
 }
 
 task calculateTMB {
