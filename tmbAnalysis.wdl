@@ -28,8 +28,7 @@ workflow tmbAnalysis {
     author: "Xuemei Luo"
     email: "xuemei.luo@oicr.on.ca"
     description: "workflow to calculate TMB"
-    dependencies:
-    []
+    dependencies:[]
     output_meta: {
       outputTMB: "output TMB file"
     }  
