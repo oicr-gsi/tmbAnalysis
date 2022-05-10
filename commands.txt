@@ -1,9 +1,9 @@
 ## Commands
-This section lists command(s) run by WORKFLOW workflow
+This section lists command(s) run by tmbAnalysis workflow
 
-* Running WORKFLOW
+* Running tmbAnalysis
 
-=== Description here ===.
+tmbAnalysis workflow runs the following command (excerpt from .wdl file). inputMaf is a placeholder for an input file.
 
 <<<
 
