@@ -2,6 +2,7 @@
 
 workflow to calculate TMB
 
+
 ## Usage
 
 ### Cromwell
@@ -27,7 +28,7 @@ Parameter|Value|Default|Description
 #### Optional task parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
-`calculateTMB.modules`|String|"tmb-r/1.0"|module for running preprocessing
+`calculateTMB.modules`|String|"tmb-r/1.0 python/3.7"|module for running preprocessing
 `calculateTMB.jobMemory`|Int|4|memory allocated to preprocessing, in GB
 `calculateTMB.timeout`|Int|6|timeout in hours
 
@@ -36,7 +37,7 @@ Parameter|Value|Default|Description
 
 Output | Type | Description
 ---|---|---
-`outputTMB`|File|output TMB file
+`outputTMB`|File|output TMB json file
 
 
 ## Commands
@@ -63,6 +64,23 @@ Output | Type | Description
  
      space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
      $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
+ 
+     python3 <<CODE
+     import json
+ 
+     metrics = []
+     file = open('~{outputFileNamePrefix}.txt', 'r')
+     a = file.readline()
+     titles = [t.strip() for t in a.split('\t')]
+     for line in file:
+         d = {}
+         for t, f in zip(titles, line.split('\t')):
+             d[t] = f.strip()
+         metrics.append(d)
+     with open('~{outputFileNamePrefix}.json', 'w') as json_file:
+         json.dump(metrics, json_file)
+ 
+     CODE
  
    >>>
  ## Support

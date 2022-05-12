@@ -30,7 +30,7 @@ workflow tmbAnalysis {
     description: "workflow to calculate TMB"
     dependencies:[]
     output_meta: {
-      outputTMB: "output TMB file"
+      outputTMB: "output TMB json file"
     }  
   } 
 }
@@ -40,7 +40,7 @@ task calculateTMB {
     File inputMaf
     String targetBed
     String outputFileNamePrefix
-    String modules = "tmb-r/1.0"
+    String modules = "tmb-r/1.0 python/3.7"
     Int jobMemory = 4
     Int timeout = 6
   }
@@ -72,6 +72,23 @@ task calculateTMB {
     space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
 
+    python3 <<CODE
+    import json
+
+    metrics = []
+    file = open('~{outputFileNamePrefix}.txt', 'r')
+    a = file.readline()
+    titles = [t.strip() for t in a.split('\t')]
+    for line in file:
+        d = {}
+        for t, f in zip(titles, line.split('\t')):
+            d[t] = f.strip()
+        metrics.append(d)
+    with open('~{outputFileNamePrefix}.json', 'w') as json_file:
+        json.dump(metrics, json_file)
+
+    CODE
+
   >>>
 
   runtime {
@@ -81,7 +98,7 @@ task calculateTMB {
   }
 
   output {
-    File outputTMB = "~{outputFileNamePrefix}.txt"
+    File outputTMB = "~{outputFileNamePrefix}.json"
   }
 
 }

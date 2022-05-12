@@ -23,4 +23,21 @@ tmbAnalysis workflow runs the following command (excerpt from .wdl file). inputM
     space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
 
+    python3 <<CODE
+    import json
+
+    metrics = []
+    file = open('~{outputFileNamePrefix}.txt', 'r')
+    a = file.readline()
+    titles = [t.strip() for t in a.split('\t')]
+    for line in file:
+        d = {}
+        for t, f in zip(titles, line.split('\t')):
+            d[t] = f.strip()
+        metrics.append(d)
+    with open('~{outputFileNamePrefix}.json', 'w') as json_file:
+        json.dump(metrics, json_file)
+
+    CODE
+
   >>>
