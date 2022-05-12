@@ -6,5 +6,5 @@ cd $1
 
 ls | sort
 
-find -name '*.txt' | xargs md5sum | sort
+find -name '*.json' | xargs md5sum | sort
 
