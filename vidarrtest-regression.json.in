@@ -1,0 +1,47 @@
+[
+    {
+        "arguments": {
+            "tmbAnalysis.inputMaf": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/TGL10_0006_Bn_P_EX.maf.gz",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "tmbAnalysis.outputFileNamePrefix": "tmbAnalysis_test",
+            "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed",
+            "tmbAnalysis.calculateTMB.modules": "tmb-r/1.0",
+            "tmbAnalysis.calculateTMB.jobMemory": null,
+            "tmbAnalysis.calculateTMB.timeout": null
+        },
+        "description": "workflow to calculate TMB",
+        "engineArguments": {
+            "write_to_cache": false,
+            "read_from_cache": false
+        },
+        "id": "TGL10_0006_Bn_P_EX_tmb",
+        "metadata": {
+            "tmbAnalysis.outputTMB": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_TGL10_0006_Bn_P_EX_tmb_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            }      
+        },
+        "validators": [
+            {
+                "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
+                "metrics_compare": "@CHECKOUT@/tests/compare.sh",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.0/output_metrics/TGL10_0006_Bn_P_EX_tmb.metrics",
+                "type": "script"
+            }
+        ]
+    }   
+]
