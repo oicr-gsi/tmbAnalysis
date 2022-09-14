@@ -15,7 +15,7 @@
             },
             "tmbAnalysis.outputFileNamePrefix": "tmbAnalysis_test",
             "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed",
-            "tmbAnalysis.calculateTMB.modules": "tmb-r/1.0",
+            "tmbAnalysis.calculateTMB.modules": "tmb-r/1.1 python/3.7",
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
         },
