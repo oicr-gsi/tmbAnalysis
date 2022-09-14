@@ -40,7 +40,7 @@ task calculateTMB {
     File inputMaf
     String targetBed
     String outputFileNamePrefix
-    String modules = "tmb-r/1.0 python/3.7"
+    String modules = "tmb-r/1.1 python/3.7"
     Int jobMemory = 4
     Int timeout = 6
   }
