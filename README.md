@@ -1,12 +1,12 @@
 # tmbAnalysis
 
 Tumour Mutation Burden (TMB) Workflow
-Tumour Mutation Burden scores are calculated from somatic variant calls coming out of the mutect2 workflow, after annotation with variant effect predictor (vep).  This requires a     tumour sample with a matched normal.
+
+Tumour Mutation Burden scores are calculated from somatic variant calls coming out of the mutect2 workflow, after annotation with variant effect predictor (vep).  This requires a tumour sample with a matched normal.
 
 The callable space is simply the region of the genome where calls are being made.  Accuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.
 
-TMB is simply the proportion of the callable space where mutations are idenftified.  This is restricted to protein altering mutations of the following vep types:
-Missense_Mutation
+TMB is simply the proportion of the callable space where mutations are idenftified.  This is restricted to protein altering mutations of the following vep types:\nMissense_Mutation
 In_Frame_Ins
 In_Frame_Del
 Frame_Shift_Ins
