@@ -4,11 +4,11 @@ Tumour Mutation Burden (TMB) Workflow
 
 Tumour Mutation Burden scores are calculated from somatic variant calls coming out of the mutect2 workflow, after annotation with variant effect predictor (vep).  This requires a tumour sample with a matched normal.
 
-The callable space is the region of the genome where calls are being made.  Accuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.
+Accuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.
 
-TMB is the proportion of the callable space where mutations are identfified.  This is restricted to protein altering mutations of the following vep classes:
+TMB is the number of PASS somatic mutations per megabase within the target region.  The full exome target region should be used for WGS samples. The mutations are restricted to protein altering mutations of the following vep classes:
 
-Missense_Mutation,In_Frame_Ins,In_Frame_Del,Frame_Shift_Ins,Frame_Shift_Del,Splice_Site,Translation_Start_Site,Nonsense_Mutation,Nonstop_Mutation,Silent
+Missense_Mutation,In_Frame_Ins,In_Frame_Del,Frame_Shift_Ins,Frame_Shift_Del,Splice_Site,Translation_Start_Site,Nonsense_Mutation,Nonstop_Mutation
 
 ## Overview
 
@@ -29,19 +29,20 @@ java -jar cromwell.jar run tmbAnalysis.wdl --inputs inputs.json
 Parameter|Value|Description
 ---|---|---
 `inputMaf`|File|input maf file
-`intervalFile`|String|target bed file
 `outputFileNamePrefix`|String|Prefix to use for output file
 
 
 #### Optional workflow parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
+`intervalFile`|String?|None|target bed file
 
 
 #### Optional task parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
-`calculateTMB.modules`|String|"tmb-r/1.1 python/3.7"|module for running preprocessing
+`calculateTMB.targetSpace`|Float|37.285536|target region per Megabase
+`calculateTMB.modules`|String|"tmb-r/1.2 python/3.7"|module for running preprocessing
 `calculateTMB.jobMemory`|Int|4|memory allocated to preprocessing, in GB
 `calculateTMB.timeout`|Int|6|timeout in hours
 
@@ -74,8 +75,11 @@ Output | Type | Description
        zcat ~{inputMaf} > ~{outputFileNamePrefix}.pass.maf
      fi
  
+     if [ -z "~{targetBed}" ]; then
+         space=~{targetSpace};
+     else space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
+     fi
  
-     space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
      $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
  
      python3 <<CODE
