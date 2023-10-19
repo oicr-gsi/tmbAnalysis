@@ -41,7 +41,7 @@ Parameter|Value|Default|Description
 #### Optional task parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
-`calculateTMB.targetSpace`|Float|37.285536|target region per Megabase
+`calculateTMB.targetSpace`|Float|37.285536|target region in Megabase. It is calculated using the target bed file. If targetBed is not provided, the defult value 37.285536 will be used
 `calculateTMB.modules`|String|"tmb-r/1.2 python/3.7"|module for running preprocessing
 `calculateTMB.jobMemory`|Int|4|memory allocated to preprocessing, in GB
 `calculateTMB.timeout`|Int|6|timeout in hours
@@ -75,12 +75,11 @@ Output | Type | Description
        zcat ~{inputMaf} > ~{outputFileNamePrefix}.pass.maf
      fi
  
-     if [ -z "~{targetBed}" ]; then
-         space=~{targetSpace};
-     else space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
+     if [ ! -z "~{targetBed}" ]; then
+       targetSpace=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
      fi
  
-     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
+     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${targetSpace}
  
      python3 <<CODE
      import json

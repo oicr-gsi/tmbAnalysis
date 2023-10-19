@@ -48,8 +48,8 @@ task calculateTMB {
 
   parameter_meta {
     inputMaf: "input maf file"
-    targetBed: "target bed file"
-    targetSpace: "target region per Megabase"
+    targetBed: "target bed file."
+    targetSpace: "target region in Megabase. It is calculated using the target bed file. If targetBed is not provided, the defult value 37.285536 will be used"
     outputFileNamePrefix: "prefix for output file"
     modules: "module for running preprocessing"
     jobMemory: "memory allocated to preprocessing, in GB"
@@ -70,12 +70,11 @@ task calculateTMB {
       zcat ~{inputMaf} > ~{outputFileNamePrefix}.pass.maf
     fi
 
-    if [ -z "~{targetBed}" ]; then
-        space=~{targetSpace};
-    else space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
+    if [ ! -z "~{targetBed}" ]; then
+      targetSpace=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
     fi
 
-    $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
+    $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${targetSpace}
 
     python3 <<CODE
     import json
