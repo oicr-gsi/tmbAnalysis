@@ -49,7 +49,7 @@ task calculateTMB {
   parameter_meta {
     inputMaf: "input maf file"
     targetBed: "target bed file."
-    targetSpace: "target region in Megabase. It is calculated using the target bed file. If targetBed is not provided, the defult value will be used"
+    targetSpace: "target region in Megabase. It is used to calculate TMB only when targetBed is not provided"
     outputFileNamePrefix: "prefix for output file"
     modules: "module for running preprocessing"
     jobMemory: "memory allocated to preprocessing, in GB"

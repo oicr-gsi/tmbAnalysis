@@ -41,7 +41,7 @@ Parameter|Value|Default|Description
 #### Optional task parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
-`calculateTMB.targetSpace`|Float|37.285536|target region in Megabase. It is calculated using the target bed file. If targetBed is not provided, the defult value will be used
+`calculateTMB.targetSpace`|Float|37.285536|target region in Megabase. It is used to calculate TMB only when targetBed is not provided
 `calculateTMB.modules`|String|"tmb-r/1.2 python/3.7"|module for running preprocessing
 `calculateTMB.jobMemory`|Int|4|memory allocated to preprocessing, in GB
 `calculateTMB.timeout`|Int|6|timeout in hours
