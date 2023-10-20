@@ -3,7 +3,7 @@ version 1.0
 workflow tmbAnalysis {
   input {
     File inputMaf
-    String intervalFile
+    String? intervalFile
     String outputFileNamePrefix
   }
 
@@ -27,7 +27,7 @@ workflow tmbAnalysis {
   meta {
     author: "Xuemei Luo"
     email: "xuemei.luo@oicr.on.ca"
-    description: "Tumour Mutation Burden (TMB) Workflow\n\nTumour Mutation Burden scores are calculated from somatic variant calls coming out of the mutect2 workflow, after annotation with variant effect predictor (vep).  This requires a tumour sample with a matched normal.\n\nThe callable space is the region of the genome where calls are being made.  Accuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.\n\nTMB is the proportion of the callable space where mutations are identfified.  This is restricted to protein altering mutations of the following vep classes:\n\nMissense_Mutation,In_Frame_Ins,In_Frame_Del,Frame_Shift_Ins,Frame_Shift_Del,Splice_Site,Translation_Start_Site,Nonsense_Mutation,Nonstop_Mutation,Silent"
+    description: "Tumour Mutation Burden (TMB) Workflow\n\nTumour Mutation Burden scores are calculated from somatic variant calls coming out of the mutect2 workflow, after annotation with variant effect predictor (vep).  This requires a tumour sample with a matched normal.\n\nAccuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.\n\nTMB is the number of PASS somatic mutations per megabase within the target region.  The full exome target region should be used for WGS samples. The mutations are restricted to protein altering mutations of the following vep classes:\n\nMissense_Mutation,In_Frame_Ins,In_Frame_Del,Frame_Shift_Ins,Frame_Shift_Del,Splice_Site,Translation_Start_Site,Nonsense_Mutation,Nonstop_Mutation"
     dependencies:[]
     output_meta: {
       outputTMB: "output TMB json file"
@@ -38,16 +38,18 @@ workflow tmbAnalysis {
 task calculateTMB {
   input {
     File inputMaf
-    String targetBed
+    String? targetBed
+    Float targetSpace = 37.285536
     String outputFileNamePrefix
-    String modules = "tmb-r/1.1 python/3.7"
+    String modules = "tmb-r/1.2 python/3.7"
     Int jobMemory = 4
     Int timeout = 6
   }
 
   parameter_meta {
     inputMaf: "input maf file"
-    targetBed: "target bed file"
+    targetBed: "target bed file."
+    targetSpace: "target region in Megabase. It is used to calculate TMB only when targetBed is not provided"
     outputFileNamePrefix: "prefix for output file"
     modules: "module for running preprocessing"
     jobMemory: "memory allocated to preprocessing, in GB"
@@ -68,8 +70,11 @@ task calculateTMB {
       zcat ~{inputMaf} > ~{outputFileNamePrefix}.pass.maf
     fi
 
+    if [ -z "~{targetBed}" ]; then
+        space=~{targetSpace};
+    else space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
+    fi
 
-    space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
     $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.txt -p -c ${space}
 
     python3 <<CODE
