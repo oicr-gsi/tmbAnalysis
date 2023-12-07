@@ -18,6 +18,7 @@
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
             "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
             "tmbAnalysis.calculateTMB.doGenomicTMB": null,
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
@@ -66,6 +67,7 @@
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
             "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
             "tmbAnalysis.calculateTMB.doGenomicTMB": null,
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
@@ -114,6 +116,7 @@
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
             "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
             "tmbAnalysis.calculateTMB.doGenomicTMB": true,
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
