@@ -131,7 +131,7 @@
             "tmbAnalysis.outputTMB": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANX_1596_Lv_M_WG_tmb_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANX_1596_Lv_M_WG_tmb_with_genome@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
