@@ -89,7 +89,7 @@ Output | Type | Description
      else space=$(awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM/1000000}' ~{targetBed})
      fi
  
-     ## calculate exome TMB
+     ## calculate exome TMB, subset to protein altering mutations
      $TMB_R_ROOT/bin/TMB.R -i ~{outputFileNamePrefix}.pass.maf -o ~{outputFileNamePrefix}.tmp1.txt -p -c ${space}
  
      cat ~{outputFileNamePrefix}.tmp1.txt | sed 's/Total_Mutations/Exome_Total_Mutations/' | sed 's/Mutation_burden/Exome_Mutation_burden/' | sed 's/Callable_space/Exome_Callable_space/' > ~{outputFileNamePrefix}.exome.txt
