@@ -1,7 +1,7 @@
 ## Commands
-This section lists command(s) run by the tmbAnalysis workflow
+This section lists command(s) run by tmbAnalysis workflow
 
-* Running WORKFLOW
+* Running tmbAnalysis
 
 === Description here ===.
 

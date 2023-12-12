@@ -6,7 +6,9 @@ Tumour Mutation Burden scores are calculated from somatic variant calls coming o
 
 Accuracy of the TMB metric is dependent on having sufficient depth to ensure coverage over this region. We recommend at a mininum 80X on the tumour and 30X on the matched normal.
 
-The TMB is the number of PASS somatic mutations with the VAF > 10% per megabase within the target region.  The exome mutations are restricted to protein altering mutations of the following vep classes:
+The TMB is the number of PASS somatic mutations with the VAF > 10% per megabase within the target region.
+
+The exome mutations are the mutations within the exome region, and the mutations are restricted to protein altering mutations of the following vep classes:
 
 Missense_Mutation,In_Frame_Ins,In_Frame_Del,Frame_Shift_Ins,Frame_Shift_Del,Splice_Site,Translation_Start_Site,Nonsense_Mutation,Nonstop_Mutation.
 
@@ -60,9 +62,9 @@ Output | Type | Description
 
 
 ## Commands
- This section lists command(s) run by the tmbAnalysis workflow
+ This section lists command(s) run by tmbAnalysis workflow
  
- * Running WORKFLOW
+ * Running tmbAnalysis
  
  === Description here ===.
  
