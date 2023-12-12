@@ -66,7 +66,7 @@ Output | Type | Description
  
  * Running tmbAnalysis
  
- === Description here ===.
+ tmbAnalysis workflow runs the following command (excerpt from .wdl file). inputMaf is a placeholder for an input file.
  
  <<<
  
