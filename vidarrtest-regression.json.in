@@ -16,7 +16,10 @@
             "tmbAnalysis.outputFileNamePrefix": "TGL10_0006_Bn_P_EX",
             "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed",
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
-            "tmbAnalysis.calculateTMB.targetSpace": null,
+            "tmbAnalysis.calculateTMB.exome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
+            "tmbAnalysis.calculateTMB.doGenomicTMB": null,
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
         },
@@ -40,7 +43,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.0.2/output_metrics/TGL10_0006_Bn_P_EX_tmb.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/TGL10_0006_Bn_P_EX_tmb.metrics",
                 "type": "script"
             }
         ]
@@ -62,7 +65,10 @@
             "tmbAnalysis.outputFileNamePrefix": "PANX_1596_Lv_M_WG_PSP-009-014_LCM1",
             "tmbAnalysis.intervalFile": null,
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
-            "tmbAnalysis.calculateTMB.targetSpace": null,
+            "tmbAnalysis.calculateTMB.exome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
+            "tmbAnalysis.calculateTMB.doGenomicTMB": null,
             "tmbAnalysis.calculateTMB.jobMemory": null,
             "tmbAnalysis.calculateTMB.timeout": null
         },
@@ -86,9 +92,58 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.0.2/output_metrics/PANX_1596_Lv_M_WG_tmb.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/PANX_1596_Lv_M_WG_tmb.metrics",
                 "type": "script"
             }
         ]
-    }       
+    },
+    {
+        "arguments": {
+            "tmbAnalysis.inputMaf": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/PANX_1596_Lv_M_WG_PSP-009-014_LCM1.mutect2.filtered.maf.gz",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "tmbAnalysis.outputFileNamePrefix": "PANX_1596_Lv_M_WG_PSP-009-014_LCM1_with_genome",
+            "tmbAnalysis.intervalFile": null,
+            "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
+            "tmbAnalysis.calculateTMB.exome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.genome_targetSpace": null,
+            "tmbAnalysis.calculateTMB.minVAF": null,
+            "tmbAnalysis.calculateTMB.doGenomicTMB": true,
+            "tmbAnalysis.calculateTMB.jobMemory": null,
+            "tmbAnalysis.calculateTMB.timeout": null
+        },
+        "description": "workflow to calculate TMB",
+        "engineArguments": {
+            "write_to_cache": false,
+            "read_from_cache": false
+        },
+        "id": "PANX_1596_Lv_M_WG_tmb_with_genome",
+        "metadata": {
+            "tmbAnalysis.outputTMB": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANX_1596_Lv_M_WG_tmb_with_genome@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            }      
+        },
+        "validators": [
+            {
+                "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
+                "metrics_compare": "@CHECKOUT@/tests/compare.sh",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/PANX_1596_Lv_M_WG_tmb_with_genome.metrics",
+                "type": "script"
+            }
+        ]
+    }        
 ]
