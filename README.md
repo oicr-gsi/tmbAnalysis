@@ -56,19 +56,19 @@ Parameter|Value|Default|Description
 
 ### Outputs
 
-Output | Type | Description
----|---|---
-`outputTMB`|File|output TMB json file
+Output | Type | Description | Labels
+---|---|---|---
+`outputTMB`|File|output TMB json file|vidarr_label: outputTMB
 
 
 ## Commands
- This section lists command(s) run by tmbAnalysis workflow
+This section lists command(s) run by tmbAnalysis workflow
  
- * Running tmbAnalysis
+* Running tmbAnalysis
  
- tmbAnalysis workflow runs the following command (excerpt from .wdl file). inputMaf is a placeholder for an input file.
+tmbAnalysis workflow runs the following command (excerpt from .wdl file). inputMaf is a placeholder for an input file.
  
- <<<
+```
  
      set -euo pipefail
  
@@ -122,8 +122,9 @@ Output | Type | Description
  
      CODE
  
-   >>>
- ## Support
+```
+
+## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
 
