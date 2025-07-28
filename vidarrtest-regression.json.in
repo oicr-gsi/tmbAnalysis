@@ -3,7 +3,7 @@
         "arguments": {
             "tmbAnalysis.inputMaf": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/TGL10_0006_Bn_P_EX.maf.gz",
+                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/test_inputs/TGL_Test01.maf.gz",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -13,8 +13,8 @@
                 },
                 "type": "EXTERNAL"
             },
-            "tmbAnalysis.outputFileNamePrefix": "TGL10_0006_Bn_P_EX",
-            "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/Agilent_SureSelect_v6.EX.hg38.bed",
+            "tmbAnalysis.outputFileNamePrefix": "TGL_Test",
+            "tmbAnalysis.intervalFile": "/.mounts/labs/gsi/testdata/tmbAnalysis/test_inputs/Agilent_SureSelect_v6.EX.hg38.bed",
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
             "tmbAnalysis.calculateTMB.genome_targetSpace": null,
@@ -28,12 +28,12 @@
             "write_to_cache": false,
             "read_from_cache": false
         },
-        "id": "TGL10_0006_Bn_P_EX_tmb",
+        "id": "TGLTest",
         "metadata": {
             "tmbAnalysis.outputTMB": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_TGL10_0006_Bn_P_EX_tmb_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_TGLTest_@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
@@ -43,7 +43,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/TGL10_0006_Bn_P_EX_tmb.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/output_metrics/workflow_test_01.metrics",
                 "type": "script"
             }
         ]
@@ -52,7 +52,7 @@
         "arguments": {
             "tmbAnalysis.inputMaf": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/PANX_1596_Lv_M_WG_PSP-009-014_LCM1.mutect2.filtered.maf.gz",
+                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/test_inputs/PANX_Test02.mutect2.filtered.maf.gz",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -62,7 +62,7 @@
                 },
                 "type": "EXTERNAL"
             },
-            "tmbAnalysis.outputFileNamePrefix": "PANX_1596_Lv_M_WG_PSP-009-014_LCM1",
+            "tmbAnalysis.outputFileNamePrefix": "PANX_Test",
             "tmbAnalysis.intervalFile": null,
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
@@ -77,12 +77,12 @@
             "write_to_cache": false,
             "read_from_cache": false
         },
-        "id": "PANX_1596_Lv_M_WG_tmb",
+        "id": "PANXTest",
         "metadata": {
             "tmbAnalysis.outputTMB": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANX_1596_Lv_M_WG_tmb_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANXTest_@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
@@ -92,7 +92,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/PANX_1596_Lv_M_WG_tmb.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/output_metrics/workflow_test_02.metrics",
                 "type": "script"
             }
         ]
@@ -101,7 +101,7 @@
         "arguments": {
             "tmbAnalysis.inputMaf": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/PANX_1596_Lv_M_WG_PSP-009-014_LCM1.mutect2.filtered.maf.gz",
+                    "configuration": "/.mounts/labs/gsi/testdata/tmbAnalysis/test_inputs/PANX_Test02.mutect2.filtered.maf.gz",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -111,7 +111,7 @@
                 },
                 "type": "EXTERNAL"
             },
-            "tmbAnalysis.outputFileNamePrefix": "PANX_1596_Lv_M_WG_PSP-009-014_LCM1_with_genome",
+            "tmbAnalysis.outputFileNamePrefix": "PANX_Test_with_genome",
             "tmbAnalysis.intervalFile": null,
             "tmbAnalysis.calculateTMB.modules": "tmb-r/1.2 python/3.7",
             "tmbAnalysis.calculateTMB.exome_targetSpace": null,
@@ -126,12 +126,12 @@
             "write_to_cache": false,
             "read_from_cache": false
         },
-        "id": "PANX_1596_Lv_M_WG_tmb_with_genome",
+        "id": "PANXTest_with_genome",
         "metadata": {
             "tmbAnalysis.outputTMB": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANX_1596_Lv_M_WG_tmb_with_genome@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_tmbAnalysis_PANXTest_with_genome@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
@@ -141,7 +141,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/1.1.0/output_metrics/PANX_1596_Lv_M_WG_tmb_with_genome.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/tmbAnalysis/output_metrics/workflow_test_03.metrics",
                 "type": "script"
             }
         ]
